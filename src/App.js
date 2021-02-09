@@ -4,8 +4,8 @@ import AnalogClock from './Components/AnalogClock'
 
 function App() {
   return (
-    <div className="App">
-      <AnalogClock/>
+    <div>
+      <div className="App-header"><AnalogClock/></div>
     </div>
   );
 }

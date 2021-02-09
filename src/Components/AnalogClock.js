@@ -5,7 +5,7 @@ class AnalogClock extends Component {
     constructor(props) {
        super(props);
  
-       this.state = { time: new Date() };
+       this.state = { time: new Date().toLocaleString() };
        this.radius = this.props.size / 2;
        this.drawingContext = null;
        this.draw24hour = this.props.timeFormat.toLowerCase().trim() === "24hour";
@@ -41,16 +41,16 @@ class AnalogClock extends Component {
     drawFace(ctx, radius) {
        ctx.beginPath();
        ctx.arc(0,0, radius, 0, 2 * Math.PI);
-       ctx.fillStyle = "white";
+       ctx.fillStyle = "#5d6675";
        ctx.fill();
  
-    //    const grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
-    //    grad.addColorStop(0, "#333");
-    //    grad.addColorStop(0.5, "white");
-    //    grad.addColorStop(1, "#333");
-    //    ctx.strokeStyle = grad;
-    //    ctx.lineWidth = radius * 0.1;
-    //    ctx.stroke();
+       const grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+       grad.addColorStop(0, "white");
+       grad.addColorStop(0.5, "white");
+       grad.addColorStop(1, "white");
+       ctx.strokeStyle = grad;
+       ctx.lineWidth = radius * 0.01;
+       ctx.stroke();
  
        ctx.beginPath();
        ctx.arc(0, 0, radius * 0.05, 0, 2 * Math.PI);
@@ -84,7 +84,7 @@ class AnalogClock extends Component {
              ctx.translate(0, -radius * 0.60);
              ctx.rotate(-ang);
              ctx.font = fontSmall;
-             ctx.fillStyle = "red";
+             ctx.fillStyle = "white";
              ctx.fillText((num + 12).toString(), 0, 0);
              ctx.rotate(ang);
              ctx.translate(0, radius * 0.60);
@@ -136,7 +136,7 @@ class AnalogClock extends Component {
        this.drawHand(ctx, minute, radius * 0.8, radius * 0.05);
        // second
        second = (second * Math.PI / 30);
-       this.drawHand(ctx, second, radius * 0.9, radius * 0.02, "red");
+       this.drawHand(ctx, second, radius * 0.9, radius * 0.02, "white");
     }
  
     drawHand(ctx, position, length, width, color) {
